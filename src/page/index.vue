@@ -36,7 +36,12 @@
     import UserMessage from "../components/UserMessage";
     export default {
         name: "index",
-      components: {CommonFooter, NewsList, MoviesList, IndexHeaderPic,MovieIndexHeader,UserMessage}
+      data(){
+        return {
+
+        }
+      },
+      components: {CommonFooter, NewsList, MoviesList, IndexHeaderPic,MovieIndexHeader,UserMessage},
       created(){
           console.log("created");
       }
@@ -62,7 +67,7 @@
     padding-top:5px;
   }
   .contentLeft{
-    width:60px;
+    width:60%;
     float:left;
     margin-top:5px;
     border-top:1px solid #000;
