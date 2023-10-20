@@ -7,19 +7,19 @@
         <user-message></user-message>
       </div>
       <div class="contentPic">
-        <index-header-pic></index-header-pic>
+        <index-header-pic v-for="item in headerItems":key="item._id":recommendImg="item.recommendImg":recommendSrc="item.recommendSrc":recommendTitle="item.recommendTitle"></index-header-pic>
       </div>
       <div class="contentMain">
         <div>
           <div class="contentLeft">
             <ul class="cont-ul">
-              <movies-list></movies-list>
+              <movies-list v-for="item in movieItems" :key="item._id" :id="item._id" :movieName="item.movieName" :movieTime="item.movieTime"></movies-list>
             </ul>
           </div>
         </div>
         <div class="contentRight">
           <ul class="cont-ul">
-            <news-list></news-list>
+            <news-list v-for="item in newsItems" :key="item._id" :id="item._id" :articleTitle="item.articleTitle" :articleTime="item.articleTime"></news-list>
           </ul>
         </div>
       </div>
@@ -34,16 +34,31 @@
     import CommonFooter from "../components/CommonFooter";
     import MovieIndexHeader from "../components/MovieIndexHeader";
     import UserMessage from "../components/UserMessage";
+    import axios from "axios";
     export default {
         name: "index",
       data(){
         return {
-
+          headerItems:[],
+          newsItems:[],
+          movieItems:[]
         }
       },
       components: {CommonFooter, NewsList, MoviesList, IndexHeaderPic,MovieIndexHeader,UserMessage},
-      created(){
-          console.log("created");
+      created() {
+        let ip="http://localhost:3000";
+        axios.get(ip+"/showindex").then((data) => {
+          this.headerItems=data.body.data;
+          console.log(data.body.data);
+        })
+        axios.post(ip+"/showArticle", send_data).then((data) => {
+          this.newsItems=data.body.data;
+          console.log(data.body.data)
+        })
+        axios.get(ip+'/showRanking').then((data)=>{
+          this.movieItems=data.body.data;
+          console.log(data.body);
+        })
       }
     }
 </script>

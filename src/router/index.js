@@ -42,6 +42,24 @@ export default new Router({
       name:'loginPage',
       meta:{title:"loginpage"},
       component:resolve=>require(["../page/loginPage"],resolve)
+    },
+    {
+      path:'/findPassword',
+      name:'findPassword',
+      meta:{title:"findPassword"},
+      component:resolve=>require(["../page/findPassword"],resolve)
+    },
+    {
+      path:'/showUser',
+      name:'showUser',
+      meta:{title:"showUser"},
+      component:resolve=>require(["../page/showUser"],resolve)
+    },
+    {
+      path:'/showMail',
+      name:'showMail',
+      meta:{title:"showMail"},
+      component:resolve=>require(["../page/showMail"],resolve)
     }
   ]
 })

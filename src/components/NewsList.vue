@@ -1,8 +1,9 @@
 <template>
     <li class="goods-list">
       <div class="newsList">
-        <router-link :to="新闻标签" class="goods-list-link">
-          文章标题，时间等等
+        <router-link :to="{path:'/newDetail',query:{id:id}}" class="goods-list-link">
+         {{articleTitle}}
+          {{articleTimeShow}}
         </router-link>
       </div>
     </li>
@@ -10,7 +11,16 @@
 
 <script>
     export default {
-        name: "NewsList"
+        name: "NewsList",
+      data(){
+          return {
+            articleTimeShow:''
+          }
+      },
+      props:["id","articleTitle","articleTime"],
+      created() {
+          this.articleTimeShow=new Date(parseInt(this.articleTime)).toLocaleString().replace(/:\d{1,2}$/,"");
+      }
     }
 </script>
 

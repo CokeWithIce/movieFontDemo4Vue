@@ -4,26 +4,26 @@
         <div>
           <div class="box">
             <label>输入用户名：</label>
-            <input placeholder="用户名">
+            <input v-model="username" placeholder="用户名">
           </div>
           <div class="box">
             <label>输入密码：</label>
-            <input placeholder="密码">
+            <input v-model="password" placeholder="密码">
           </div>
           <div class="box">
             <label>重复输入密码：</label>
-            <input placeholder="密码">
+            <input v-model="rePassword" placeholder="密码">
           </div>
           <div class="box">
             <label>输入邮箱：</label>
-            <input placeholder="邮箱">
+            <input v-model="userMail" placeholder="邮箱">
           </div>
           <div class="box">
             <label>输入手机：</label>
-            <input placeholder="手机">
+            <input v-model="userPhone" placeholder="手机">
           </div>
           <div class="box">
-            <button >注册</button>
+            <button @click="userRegister" >注册</button>
           </div>
         </div>
       </div>
@@ -31,11 +31,39 @@
 </template>
 
 <script>
+    import axios from "axios";
+
     export default {
         name: "registerPage",
       data(){
           return {
-
+            username:"",
+            password:"",
+            userMail:"",
+            userPhone:"",
+            rePassWord:""
+          }
+      }
+      methods:{
+          userRegister:function(){
+            if(this.password!=this.rePassWord){
+              alert("两次密码不一致！")
+            }else{
+              let sendData={
+                username:this.username,
+                password:this.password,
+                userMail:this.userMail,
+                userPhone:this.userPhone
+              }
+              axios.post("http://localhost:3000/users/register",sendData).then((data)=>{
+                if(data.body.status==1){
+                  alert(data.body.message);
+                }else{
+                  alert(data.body.message);
+                  this.$router.go(-1)
+                }
+              })
+            }
           }
       }
     }

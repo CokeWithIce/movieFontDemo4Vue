@@ -7,7 +7,7 @@
       <div>
         <div class="contentLeft">
           <ul class="cont-ul">
-            <movies-list>
+            <movies-list v-for="item in movieItems" :key="item._id" :id="item._id" :movieName="item.movieName" :movieTime="item.movieTime">
 
             </movies-list>
           </ul>
@@ -24,9 +24,21 @@
     import MoviesList from "../components/MoviesList";
     import MovieIndexHeader from "../components/MovieIndexHeader";
     import CommonFooter from "../components/CommonFooter";
+    import axios from "axios";
     export default {
         name: "moveList",
-      components: {CommonFooter, MoviesList,MovieIndexHeader}
+      components: {CommonFooter, MoviesList,MovieIndexHeader},
+      data(){
+          return {
+            movieItems:[]
+          }
+      },
+      created() {
+        axios.get("http://localhost:3000/movie/list").then((data) => {
+          this.movieItems=data.body.data;
+          console.log(data.body);
+        });
+      }
     }
 </script>
 
