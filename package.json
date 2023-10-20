@@ -1,8 +1,8 @@
 {
-  "name": "y",
+  "name": "movieShow",
   "version": "1.0.0",
-  "description": "y",
-  "author": "y",
+  "description": "a test demo",
+  "author": "wangyu",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
@@ -10,6 +10,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "axios": "^1.4.0",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },
